@@ -8,16 +8,23 @@ type AllType = {
   name: string;
   position: number;
   color: string;
-  weight: number
-}
+  weight: number;
+};
 
-function compare (top, bottom): AllType {
+function compare<T extends AllType>(top: Pick<T, keyof AllType>, bottom: Pick<T, keyof AllType>): AllType {
   return {
     name: top.name,
     color: top.color,
     position: bottom.position,
     weight: bottom.weight,
-  }
+  };
 }
+
+const result = compare(
+  { name: 'Object1', position: 1, color: 'Red', weight: 10 },
+  { name: 'Object2', position: 2, color: 'Blue', weight: 15 }
+);
+
+console.log(result);
 
 export {};
